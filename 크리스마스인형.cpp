@@ -15,7 +15,6 @@ vector<int> PartialSum(vector<int>& number) {
 	for (int i = 1; i <= number.size(); i++) {
 		psum[i] = (psum[i - 1] + number[i - 1]) % MOD;
 	}
-
 	return psum;
 }
 
@@ -39,8 +38,12 @@ int BuyToWay(const vector<int>& psum, int k) {
 		if (count[i] >= 2)
 			ret = (ret + (count[i] * (count[i] - 1)) / 2) % MOD;   // 2개 이상일 경우 Combinaition을 사용해서 2가지를 뽑는 확률을 계산
 	}
-
 	return ret;
+}
+
+vector<int> MaxofBuy(const vector<int>& psum, int i) {
+	vector<int> answer;
+	return answer;
 }
 
 void main() {
