@@ -41,6 +41,6 @@ void main() {
 	}
 
 	for (int k : array1) {
-		cout << k << " ";
+		printf("%d ", k);
 	}
 }
