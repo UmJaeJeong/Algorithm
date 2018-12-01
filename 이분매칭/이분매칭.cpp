@@ -6,13 +6,13 @@ using namespace std;
 //이분매칭==> 두가지의 집단을 가장 효과적으로 매칭시켜줄수 있는 알고리즘
 /*
 특징 : 최대매칭 의미
-       가장 많이 연결된 그래프
+가장 많이 연결된 그래프
 */
 
-vector<int> a[MAX];
-int d[MAX];
-bool c[MAX];
-int n = 3, m, s;
+vector<int> a[MAX];//초기에 매칭되는 값들
+int d[MAX];//index와 매칭된 값
+bool c[MAX];//처리한노드인지 유뮤 판단
+int n = 3;
 
 //매칭 성공한 경우 true, 실패한 경우 false
 bool dfs(int x) {
@@ -47,10 +47,10 @@ int main() {
 		if (dfs(i)) count++;
 	}
 	cout << count << "개의 매칭이 이루어졌습니다." << endl;
-		for (int i = 1; i <= 100; i++) {
-			if (d[i] != 0) {
-				cout << d[i] << "->" << i << endl;
-			}
+	for (int i = 1; i <= 100; i++) {
+		if (d[i] != 0) {
+			cout << d[i] << "->" << i << endl;
 		}
+	}
 	return 0;
 }
