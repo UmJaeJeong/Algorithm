@@ -19,9 +19,9 @@ void topolgysort() {
 			q.push(i);
 		}
 	}
-	
+
 	//정렬이 완전히 수행되려면 정확히 n개의 노드를 방문한다.
-	for (int i = 1; i <= i; i++) {
+	for (int i = 1; i <= n; i++) {
 		int x = q.front();
 		q.pop();
 		result[i] = x;
@@ -39,7 +39,14 @@ void topolgysort() {
 }
 
 int main() {
-
-
+	int m;
+	cin >> n >> m;
+	for (int i = 0; i < m; i++) {
+		int x, y;
+		cin >> x >> y;
+		a[x].push_back(y);
+		inDegree[y]++;
+	}
+	topolgysort();
 	return 0;
 }
