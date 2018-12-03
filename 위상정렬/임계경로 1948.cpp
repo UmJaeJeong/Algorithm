@@ -77,12 +77,30 @@ void topologySort() {
 		int y = q.front();
 		q.pop();
 		for (int i = 0; i < b[y].size(); i++) {
-
+			Edge x = Edge(b[y][i].node, b[y][i].time);
+			//최장 경로에 포함되는 간선인지 확인
+			if (result[y] - result[x.node] == x.time) {
+				count++;
+				if (c[x.node] == 0) {
+					q.push(x.node);
+					c[x.node] = 1;
+				}
+			}
 		}
 	}
-
+	cout << result[finish] << ' ' << count << endl;
 }
 
 int main(void) {
-
+	int m;
+	cin >> n >> m;
+	for (int i = 0; i < m; i++) {
+		int x, node, time;
+		cin >> x >> node >> time;
+		a[x].push_back(Edge(node, time));
+		b[node].push_back(Edge(x, time));
+		inDegree[node]++;
+	}
+	cin >> start >> finish;
+	topologySort();
 }
