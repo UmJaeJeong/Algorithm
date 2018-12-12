@@ -9,7 +9,7 @@ DNA는 서로 4가지의 튜클레오티드로 이우어져 있다. ATGC
 
 */
 //TACG 네가지 유전자
-#define MAX 51
+#define MAX 1001
 string a[MAX];
 string answer;
 int main() {
@@ -18,14 +18,14 @@ int main() {
 	for (int i = 0; i < n; i++) {
 		cin >> a[i];
 	}
-
+	
 	//해밍거리 구하기
 	int result = 0;
 	for (int i = 0; i < m; i++) {
 		sort(a, a + n);
 
 		int j = 0;
-		int count[4] = { 0,};
+		int count[4] = { 0, };
 
 		while (a[j][i] == 'A') {
 			count[0]++; j++;
@@ -40,11 +40,11 @@ int main() {
 			count[3]++; j++;
 		}
 
-		int max = 0;
+		int min = 0;
 		int index = 0;
 		for (int k = 0; k < 4; k++) {
-			if (max < count[k]) {
-				max = count[k];
+			if (min < count[k]) {
+				min = count[k];
 				index = k;
 			}
 		}
@@ -64,6 +64,6 @@ int main() {
 	cout << answer << endl;
 	cout << result << endl;
 
-
+	 
 	return 0;
 }
