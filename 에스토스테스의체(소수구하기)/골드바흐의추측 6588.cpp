@@ -8,8 +8,8 @@ using namespace std;
 int a[MAX];
 int main() {
 	a[1] = 1;
-	for(int i = 2; i < MAX; i++) {
-		for (int j = i * 2; j < MAX; j+=i) {
+	for (int i = 2; i < MAX; i++) {
+		for (int j = i * 2; j < MAX; j += i) {
 			if (a[j] == 1)continue;
 			a[j] = 1;
 		}
@@ -23,26 +23,16 @@ int main() {
 		n.push_back(x);
 	}
 
-	bool check = false;
 	for (int k = 0; k < n.size(); k++) {
-		check = false;
-		for (int i = 2; i <= n[k]; i++) {
-
-			for (int j = 2; j <= n[k]; j++) {
-				cout << i << ' ' << j << endl;
-				if (a[i] == 1 || a[j] == 1)continue;
-
-				if (i+j == n[k]) {
-					cout << n[k] << '=' << i << '+' << j << endl;
-					check = true;
-				}
-				else if (i == n[k] && j == n[k]) {
-					cout << "Goldbach's conjecture is wrong." << endl;
-				}
+		for (int i = n[k]; i >= n[k] / 2; i--) {
+			if (a[i] == 1 || a[n[k] - i] == 1) continue;
+			if (i + (n[k] - i) == n[k]) {
+				cout << n[k] << " = " << n[k] - i << " + " << i << endl;
+				break;
 			}
-
-			if (check==true)break;
-
+			else if (i == n[k] / 2) {
+				cout << "Goldbach's conjecture is wrong." << endl;
+			}
 		}
 
 	}
