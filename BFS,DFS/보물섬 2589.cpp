@@ -1,6 +1,7 @@
 #include<iostream>
 #include<string>
 #include<queue>
+#include <utility>
 using namespace std;
 #define MAX 51
 
@@ -15,7 +16,7 @@ int n, m;
 void bfs(int i, int j) {
 	queue<pair<int,int>> q;
 	q.push(make_pair(i, j));
-
+	c[i][j] = 1;
 	while (!q.empty()) {
 		pair<int, int> k = q.front();
 		q.pop();
@@ -26,7 +27,7 @@ void bfs(int i, int j) {
 			if (nx >= 0 && nx<n && ny >= 0 && ny<m) {
 				if (a[nx][ny] == 'L' && c[nx][ny]==0) {
 					q.push(make_pair(nx, ny));
-					c[nx][ny] = c[i][j] + 1;
+					c[nx][ny] = c[k.first][k.second] + 1;
 					if (c[nx][ny]>Max) Max = c[nx][ny];
 				}
 			}
@@ -60,7 +61,7 @@ int main() {
 			
 		}
 	}
-	cout << Max;
+	cout << Max-1;
 	
 	return 0;
 }
