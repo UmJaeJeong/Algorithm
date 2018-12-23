@@ -33,7 +33,7 @@ void bfs(int i, int j) {
 	queue<pair<int, int>> q;
 	q.push(make_pair(i, j));
 
-	c[i][j];
+	c[i][j]=1;
 	while (!q.empty()) {
 		pair<int, int> k = q.front();
 		q.pop();
@@ -41,11 +41,11 @@ void bfs(int i, int j) {
 			int nx = k.first + d1[x];
 			int ny = k.second + d2[x];
 			if (nx >= 0 && nx < m&&ny >= 0 && ny < n) {
-				if (c[nx][ny] == 0 && a[nx][ny] != -1) {
-					q.push(make_pair(nx,ny));
-					c[nx][ny] = c[k.first][k.second] + 1;
-					a[nx][ny] = 1;
-					if (Max < c[nx][ny]) Max = c[nx][ny];
+				if ((a[nx][ny] == 0 || a[nx][ny] > a[i][j] + 1)){
+					q.push(make_pair(nx, ny));
+					c[nx][ny] = 1;
+					a[nx][ny] = a[k.first][k.second] + 1;
+					if (Max < a[nx][ny]) Max = a[nx][ny];
 				}
 			}
 		}
@@ -75,6 +75,15 @@ int main() {
 		for (int j = 0; j < n; j++) {
 			init();
 			if (a[i][j] == 1)bfs(i, j);
+		}
+	}
+	int cnt = 0;
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			if (a[i][j] == 0) {
+				cout << -1;
+				return 0;
+			}
 		}
 	}
 
