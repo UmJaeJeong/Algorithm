@@ -29,64 +29,78 @@ int day;
 int emptybox;
 int Max = 0;
 
-void bfs(int i, int j) {
-	queue<pair<int, int>> q;
-	q.push(make_pair(i, j));
+void Print() {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			cout << a[i][j];
+		}
+		cout << endl;
+	}
+}
 
-	c[i][j]=1;
+void Print1() {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			cout << c[i][j];
+		}
+		cout << endl;
+	}
+}
+
+void bfs(int x, int y) {
+	queue<pair<int, int>> q;
+	q.push(make_pair(x, y));
+
+	c[x][y] = 1;
 	while (!q.empty()) {
 		pair<int, int> k = q.front();
 		q.pop();
-		for (int x = 0; x < 4; x++) {
-			int nx = k.first + d1[x];
-			int ny = k.second + d2[x];
-			if (nx >= 0 && nx < m&&ny >= 0 && ny < n) {
-				if ((a[nx][ny] == 0 || a[nx][ny] > a[i][j] + 1)){
-					q.push(make_pair(nx, ny));
-					c[nx][ny] = 1;
+		for (int i = 0; i < 4; i++) {
+			int nx = k.first + d1[i];
+			int ny = k.second + d2[i];
+			if (nx >= 0 && nx < n&&ny >= 0&&ny < m) {
+				if ((a[nx][ny] == 0 || a[nx][ny] > a[k.first][k.second] + 1)) {
 					a[nx][ny] = a[k.first][k.second] + 1;
-					if (Max < a[nx][ny]) Max = a[nx][ny];
+					q.push(make_pair(nx,ny));
 				}
 			}
 		}
 
-
 	}
 }
 
-void init() {
-	for (int i = 0; i < m; i++) {
-		for (int j = 0; j < n; j++) {
-			c[i][j] = 0;
-		}
-	}
-	day = 0;
-}
 int main() {
+
 	cin >> m >> n;
-	for (int i = 0; i < m; i++) {
-		for (int j = 0; j < n; j++) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
 			cin >> a[i][j];
-			if (a[i][j] == -1)emptybox++;
 		}
+		cout << endl;
 	}
 	
-	for (int i = 0; i < m; i++) {
-		for (int j = 0; j < n; j++) {
-			init();
-			if (a[i][j] == 1)bfs(i, j);
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			if (a[i][j] == 1)bfs(i,j);
 		}
 	}
-	int cnt = 0;
-	for (int i = 0; i < m; i++) {
-		for (int j = 0; j < n; j++) {
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
 			if (a[i][j] == 0) {
 				cout << -1;
 				return 0;
 			}
+			if (Max < a[i][j]) {
+				Max = a[i][j];
+			}
+
+
 		}
 	}
 
-	cout << Max;
+	//Print1();
+
+	cout << Max-1 << endl;
 	return 0;
 }
