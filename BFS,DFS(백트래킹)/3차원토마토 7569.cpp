@@ -1,6 +1,9 @@
 #include<iostream>
+using namespace std;
+#include<iostream>
 #include<queue>
 using namespace std;
+
 #define MAX 101
 
 int a[MAX][MAX][MAX];
@@ -8,7 +11,7 @@ int N, M, H;
 int d1[6] = { 0,0,0,0,1,-1 };
 int d2[6] = { 0,0,1,-1,0,0 };
 int d3[6] = { 1,-1,0,0,0,0 };
-
+int cnt;
 class box {
 public:
 	int height;
@@ -33,17 +36,21 @@ void bfs(int h, int n, int m) {
 			int nn = k.row + d2[i];
 			int nm = k.col + d3[i];
 
-			if ((nh>=0 && nh<H &&nn>=0&&nn<N&&nm>=0&&nm<M)||a[nh][nn][nm]>a[k.height][k.row][k.col]+1 ) {
-				a[nh][nn][nm] = a[k.height][k.row][k.col] + 1;
-				bfs(nh, nn, nm);
-				q.push(box(nh,nn,nm));
+			if ((nh >= 0 && nh<H &&nn >= 0 && nn<N&&nm >= 0 && nm<M)) {
+				if (a[nh][nn][nm] > a[k.height][k.row][k.col] + 1 || a[nh][nn][nm]==0) {
+					a[nh][nn][nm] = a[k.height][k.row][k.col] + 1;
+
+					bfs(nh, nn, nm);
+					q.push(box(nh, nn, nm));
+				}
+
 			}
 		}
 	}
 
 }
 
-int mian() {
+int main() {
 	cin >> M >> N >> H;
 	for (int k = 0; k < H; k++) {
 		for (int i = 0; i < N; i++) {
@@ -60,20 +67,19 @@ int mian() {
 			}
 		}
 	}
-
+	
 	int answer = 0;
 	for (int k = 0; k < H; k++) {
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < M; j++) {
 				if (a[k][i][j] == 0) {
-					answer = 0;
-					break;
+					cout << -1 << endl;
+					return 0;
 				}
 				if (answer < a[k][i][j]) answer = a[k][i][j];
 			}
 		}
 	}
-
-	cout << answer << endl;
+	cout << answer-1 << endl;
 	return 0;
 }

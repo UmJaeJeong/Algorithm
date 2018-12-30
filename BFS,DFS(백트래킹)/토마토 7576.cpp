@@ -29,23 +29,6 @@ int day;
 int emptybox;
 int Max = 0;
 
-void Print() {
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
-			cout << a[i][j];
-		}
-		cout << endl;
-	}
-}
-
-void Print1() {
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
-			cout << c[i][j];
-		}
-		cout << endl;
-	}
-}
 
 void bfs(int x, int y) {
 	queue<pair<int, int>> q;
